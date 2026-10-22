@@ -1,0 +1,401 @@
+{
+  "files": {
+    "customers.csv": {
+      "rows": 405,
+      "columns": 10,
+      "distinct_keys": 400,
+      "duplicate_excess": 5,
+      "blanks": {
+        "customer_id": 0,
+        "full_name": 0,
+        "email": 0,
+        "phone": 0,
+        "city": 6,
+        "area": 0,
+        "pincode": 0,
+        "signup_date": 0,
+        "loyalty_tier": 0,
+        "is_active": 0
+      },
+      "sha256": "dd913512ebea0caae09e984da1c734ac0fd1712c0a5919eeed557943864cb061",
+      "numeric_ranges": {},
+      "date_ranges": {
+        "signup_date": {
+          "min": "2024-06-01T00:00:00",
+          "max": "2027-01-05T00:00:00"
+        }
+      },
+      "categorical_values": {
+        "loyalty_tier": [
+          "BRONZE",
+          "Bronze",
+          "Gold",
+          "Platinum",
+          "SILVER",
+          "Silver",
+          "bronze"
+        ],
+        "is_active": [
+          "N",
+          "Y"
+        ]
+      }
+    },
+    "orders.csv": {
+      "rows": 2412,
+      "columns": 13,
+      "distinct_keys": 2400,
+      "duplicate_excess": 12,
+      "blanks": {
+        "order_id": 0,
+        "order_ts": 1,
+        "customer_id": 18,
+        "store_id": 0,
+        "product_id": 0,
+        "quantity": 0,
+        "unit_price": 0,
+        "discount_pct": 0,
+        "order_amount": 0,
+        "payment_mode": 0,
+        "order_status": 0,
+        "channel": 0,
+        "delivery_minutes": 164
+      },
+      "sha256": "c4e7a190561370fcd0ce992af2ccb72f8818927bbd5bae7c0951a20d30226362",
+      "numeric_ranges": {
+        "quantity": {
+          "min": "-3",
+          "max": "5"
+        },
+        "unit_price": {
+          "min": "10.0",
+          "max": "883.0"
+        },
+        "discount_pct": {
+          "min": "0",
+          "max": "250"
+        },
+        "order_amount": {
+          "min": "-1593.0",
+          "max": "9576.0"
+        },
+        "delivery_minutes": {
+          "min": "8",
+          "max": "1440"
+        }
+      },
+      "date_ranges": {
+        "order_ts": {
+          "min": "2026-09-01T06:30:15",
+          "max": "2027-01-01T09:00:00"
+        }
+      },
+      "categorical_values": {
+        "payment_mode": [
+          "CARD",
+          "Card",
+          "Cash on Delivery",
+          "Cashh",
+          "UPI",
+          "UPI ",
+          "Wallet",
+          "cod",
+          "upi"
+        ],
+        "order_status": [
+          "CANCELLED",
+          "DELIVERED",
+          "Pending??",
+          "RETURNED",
+          "delivered"
+        ],
+        "channel": [
+          "App",
+          "Web"
+        ]
+      }
+    },
+    "orders_2026-10-01_increment.csv": {
+      "rows": 160,
+      "columns": 13,
+      "distinct_keys": 160,
+      "duplicate_excess": 0,
+      "blanks": {
+        "order_id": 0,
+        "order_ts": 0,
+        "customer_id": 0,
+        "store_id": 0,
+        "product_id": 0,
+        "quantity": 0,
+        "unit_price": 0,
+        "discount_pct": 0,
+        "order_amount": 0,
+        "payment_mode": 0,
+        "order_status": 0,
+        "channel": 0,
+        "delivery_minutes": 0
+      },
+      "sha256": "212c775dd41151ce2bceaa206dd2952693cead0776627ee06925c445438e03d9",
+      "numeric_ranges": {
+        "quantity": {
+          "min": "1",
+          "max": "4"
+        },
+        "unit_price": {
+          "min": "10.0",
+          "max": "883.0"
+        },
+        "discount_pct": {
+          "min": "0",
+          "max": "20"
+        },
+        "order_amount": {
+          "min": "11.0",
+          "max": "2052.0"
+        },
+        "delivery_minutes": {
+          "min": "8",
+          "max": "34"
+        }
+      },
+      "date_ranges": {
+        "order_ts": {
+          "min": "2026-09-01T09:38:13",
+          "max": "2026-10-01T22:33:00"
+        }
+      },
+      "categorical_values": {
+        "payment_mode": [
+          "Card",
+          "Cash on Delivery",
+          "UPI",
+          "Wallet"
+        ],
+        "order_status": [
+          "DELIVERED",
+          "RETURNED"
+        ],
+        "channel": [
+          "App"
+        ]
+      }
+    },
+    "payments.csv": {
+      "rows": 2228,
+      "columns": 7,
+      "distinct_keys": 2224,
+      "duplicate_excess": 4,
+      "blanks": {
+        "payment_id": 0,
+        "order_id": 0,
+        "payment_ts": 0,
+        "payment_mode": 0,
+        "amount_paid": 0,
+        "payment_status": 0,
+        "gateway_ref": 301
+      },
+      "sha256": "7dd94c062a8b0e6334f4c620ec62c0146402ea69a21c6252d9b058ccd53e30e3",
+      "numeric_ranges": {
+        "amount_paid": {
+          "min": "-1593.0",
+          "max": "9576.0"
+        }
+      },
+      "date_ranges": {
+        "payment_ts": {
+          "min": "2026-09-01T06:30:24",
+          "max": "2027-01-01T09:01:46"
+        }
+      },
+      "categorical_values": {
+        "payment_mode": [
+          "CARD",
+          "Card",
+          "Cash on Delivery",
+          "Cashh",
+          "UPI",
+          "UPI ",
+          "Wallet",
+          "cod",
+          "upi"
+        ],
+        "payment_status": [
+          "FAILED",
+          "REFUNDED",
+          "SUCCESS"
+        ]
+      }
+    },
+    "products.csv": {
+      "rows": 152,
+      "columns": 10,
+      "distinct_keys": 150,
+      "duplicate_excess": 2,
+      "blanks": {
+        "product_id": 0,
+        "product_name": 0,
+        "category": 3,
+        "sub_category": 0,
+        "brand": 0,
+        "mrp": 0,
+        "cost_price": 0,
+        "unit": 0,
+        "is_perishable": 0,
+        "launch_date": 0
+      },
+      "sha256": "a86d6227e09c2cb6bd20a70788bb53b0b5c7ade385e382f589d0fa8a15767279",
+      "numeric_ranges": {
+        "mrp": {
+          "min": "-203.0",
+          "max": "883.0"
+        },
+        "cost_price": {
+          "min": "6.79",
+          "max": "631.79"
+        }
+      },
+      "date_ranges": {
+        "launch_date": {
+          "min": "2023-01-03T00:00:00",
+          "max": "2025-09-20T00:00:00"
+        }
+      },
+      "categorical_values": {
+        "category": [
+          "",
+          "Dairy & Bakery",
+          "Fruits & Vegetables",
+          "Household",
+          "Personal Care",
+          "Snacks & Beverages",
+          "Staples"
+        ],
+        "unit": [
+          "kg",
+          "pack",
+          "unit"
+        ],
+        "is_perishable": [
+          "False",
+          "True"
+        ]
+      }
+    },
+    "stores.csv": {
+      "rows": 15,
+      "columns": 8,
+      "distinct_keys": 15,
+      "duplicate_excess": 0,
+      "blanks": {
+        "store_id": 0,
+        "store_name": 0,
+        "zone": 1,
+        "area": 0,
+        "pincode": 0,
+        "open_date": 0,
+        "manager_name": 0,
+        "capacity_orders_per_day": 0
+      },
+      "sha256": "6bfdf32dd4c36d7a6c68b3b7f10088eda44f1a8d072eb90a6dcac08a40d0b746",
+      "numeric_ranges": {
+        "capacity_orders_per_day": {
+          "min": "0",
+          "max": "600"
+        }
+      },
+      "date_ranges": {
+        "open_date": {
+          "min": "2024-02-14T00:00:00",
+          "max": "2025-07-28T00:00:00"
+        }
+      },
+      "categorical_values": {
+        "zone": [
+          "",
+          "East",
+          "North",
+          "South",
+          "West"
+        ]
+      }
+    }
+  },
+  "issues": 287,
+  "affected_rows": 262,
+  "increment": {
+    "new": 150,
+    "corrections": 10,
+    "changes": [
+      {
+        "order_id": "ORD000017",
+        "source_row": 2,
+        "changed_columns": [
+          "order_status"
+        ]
+      },
+      {
+        "order_id": "ORD000271",
+        "source_row": 3,
+        "changed_columns": [
+          "order_status"
+        ]
+      },
+      {
+        "order_id": "ORD000332",
+        "source_row": 4,
+        "changed_columns": [
+          "order_status"
+        ]
+      },
+      {
+        "order_id": "ORD000337",
+        "source_row": 5,
+        "changed_columns": [
+          "order_status"
+        ]
+      },
+      {
+        "order_id": "ORD000584",
+        "source_row": 6,
+        "changed_columns": [
+          "order_status"
+        ]
+      },
+      {
+        "order_id": "ORD000708",
+        "source_row": 7,
+        "changed_columns": [
+          "order_status"
+        ]
+      },
+      {
+        "order_id": "ORD000822",
+        "source_row": 8,
+        "changed_columns": [
+          "order_status"
+        ]
+      },
+      {
+        "order_id": "ORD001025",
+        "source_row": 9,
+        "changed_columns": [
+          "order_status"
+        ]
+      },
+      {
+        "order_id": "ORD001067",
+        "source_row": 10,
+        "changed_columns": [
+          "order_status"
+        ]
+      },
+      {
+        "order_id": "ORD001990",
+        "source_row": 11,
+        "changed_columns": [
+          "order_status"
+        ]
+      }
+    ]
+  }
+}

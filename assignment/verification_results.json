@@ -1,0 +1,18 @@
+[
+  {
+    "increment": false,
+    "orders": 1635,
+    "revenue": "882163.60",
+    "margin": "217377.92",
+    "mismatches": 104,
+    "parity": true
+  },
+  {
+    "increment": true,
+    "orders": 1628,
+    "revenue": "878583.90",
+    "margin": "216122.30",
+    "mismatches": 254,
+    "parity": true
+  }
+]

@@ -1,0 +1,22 @@
+# Direct project dependencies. Airflow itself is supplied by Astro Runtime.
+# Verified in the runtime with pandas 2.3.3 and DuckDB 1.5.6,
+# and locally with pandas 3.0.6 and DuckDB 1.5.6.
+pandas>=2.3,<4
+duckdb==1.5.6
+numpy>=2,<3
+pendulum
+requests
+pytest
+
+# Local screenshot/evidence tooling (include/capture_submission.py).
+# Uses installed Google Chrome via channel='chrome'; the browser is not a pip package.
+playwright==1.63.0
+
+# Retained for the unchanged trainer Meridian example.
+scikit-learn
+langgraph
+langchain
+langchain-openai
+langchain-core
+slack_sdk
+apache-airflow-providers-slack

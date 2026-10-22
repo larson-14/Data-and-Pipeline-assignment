@@ -1,0 +1,7 @@
+order_id,orders_source_file,orders_data_row,quantity_as_received,unit_price_as_received,discount_pct_as_received,order_amount_as_received,net_revenue,customers_data_row,products_data_row,stores_data_row,payments_data_rows
+ORD000173,orders.csv,580,2,93.0,15,158.1,158.10,178,98,11,610
+ORD000192,orders.csv,2232,1,230.0,0,230.0,230.00,276,40,11,475
+ORD000197,orders.csv,1827,1,336.0,15,285.6,285.60,179,71,11,1028
+ORD000212,orders.csv,1921,3,666.0,0,1998.0,1998.00,33,129,11,1431
+ORD000213,orders.csv,112,2,444.0,15,754.8,754.80,249,41,11,17
+ORD000224,orders.csv,1175,1,248.0,0,248.0,248.00,69,135,11,893

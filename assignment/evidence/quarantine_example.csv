@@ -1,0 +1,9 @@
+order_id,source_file,source_row,severity,failure_reason
+ORD001462,orders.csv,6,Critical,order_duplicate
+ORD000385,orders.csv,8,Critical,order_store_quality
+ORD002073,orders.csv,9,Critical,order_store_quality
+ORD001334,orders.csv,15,Critical,order_store_quality
+ORD000682,orders.csv,20,Critical,order_store_quality
+ORD000164,orders.csv,27,Critical,order_store_quality
+ORD001898,orders.csv,33,Critical,order_store_quality
+ORD002255,orders.csv,35,Critical,order_customer_required; order_customer_key

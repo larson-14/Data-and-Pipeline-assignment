@@ -1,0 +1,6164 @@
+{
+  "pipeline": "etl",
+  "run_id": "submission_20261022_035604_etl",
+  "state": "success",
+  "tasks": [
+    {
+      "task_id": "report",
+      "state": "success",
+      "try_number": 1,
+      "start_time": "2026-10-22 03:56:39.043102+00:00",
+      "end_time": "2026-10-22 03:56:41.824291+00:00",
+      "duration": 2.781189
+    },
+    {
+      "task_id": "extract_increment",
+      "state": "success",
+      "try_number": 1,
+      "start_time": "2026-10-22 03:56:20.159687+00:00",
+      "end_time": "2026-10-22 03:56:21.809848+00:00",
+      "duration": 1.650161
+    },
+    {
+      "task_id": "extract_products",
+      "state": "success",
+      "try_number": 1,
+      "start_time": "2026-10-22 03:56:09.047155+00:00",
+      "end_time": "2026-10-22 03:56:11.178115+00:00",
+      "duration": 2.13096
+    },
+    {
+      "task_id": "extract_stores",
+      "state": "success",
+      "try_number": 1,
+      "start_time": "2026-10-22 03:56:09.046761+00:00",
+      "end_time": "2026-10-22 03:56:11.144386+00:00",
+      "duration": 2.097625
+    },
+    {
+      "task_id": "validate_increment",
+      "state": "success",
+      "try_number": 1,
+      "start_time": "2026-10-22 03:56:22.523877+00:00",
+      "end_time": "2026-10-22 03:56:26.067043+00:00",
+      "duration": 3.543166
+    },
+    {
+      "task_id": "extract_payments",
+      "state": "success",
+      "try_number": 1,
+      "start_time": "2026-10-22 03:56:09.044346+00:00",
+      "end_time": "2026-10-22 03:56:11.434839+00:00",
+      "duration": 2.390493
+    },
+    {
+      "task_id": "quarantine",
+      "state": "success",
+      "try_number": 1,
+      "start_time": "2026-10-22 03:56:27.119864+00:00",
+      "end_time": "2026-10-22 03:56:29.771022+00:00",
+      "duration": 2.651158
+    },
+    {
+      "task_id": "transform",
+      "state": "success",
+      "try_number": 1,
+      "start_time": "2026-10-22 03:56:27.163793+00:00",
+      "end_time": "2026-10-22 03:56:32.552307+00:00",
+      "duration": 5.388514
+    },
+    {
+      "task_id": "load_to_warehouse",
+      "state": "success",
+      "try_number": 1,
+      "start_time": "2026-10-22 03:56:33.484937+00:00",
+      "end_time": "2026-10-22 03:56:38.390230+00:00",
+      "duration": 4.905293
+    },
+    {
+      "task_id": "extract_orders",
+      "state": "success",
+      "try_number": 1,
+      "start_time": "2026-10-22 03:56:09.054215+00:00",
+      "end_time": "2026-10-22 03:56:11.502144+00:00",
+      "duration": 2.447929
+    },
+    {
+      "task_id": "run_audit",
+      "state": "success",
+      "try_number": 1,
+      "start_time": "2026-10-22 03:56:42.588767+00:00",
+      "end_time": "2026-10-22 03:56:46.503004+00:00",
+      "duration": 3.914237
+    },
+    {
+      "task_id": "extract_customers",
+      "state": "success",
+      "try_number": 1,
+      "start_time": "2026-10-22 03:56:09.044145+00:00",
+      "end_time": "2026-10-22 03:56:11.190361+00:00",
+      "duration": 2.146216
+    },
+    {
+      "task_id": "validate_data",
+      "state": "success",
+      "try_number": 1,
+      "start_time": "2026-10-22 03:56:12.343192+00:00",
+      "end_time": "2026-10-22 03:56:19.067318+00:00",
+      "duration": 6.724126
+    }
+  ],
+  "queries": [
+    {
+      "number": 1,
+      "title": "Daily delivered, reconciled revenue by zone and store (separate grains).",
+      "sql": "SELECT CASE WHEN grouping(store_id)=1 THEN 'ZONE' ELSE 'STORE' END grain,order_date,zone,store_id,store_name,count(*) orders,sum(net_revenue) net_revenue\nFROM etl_fact_orders JOIN etl_dim_store USING(store_id) GROUP BY GROUPING SETS((order_date,zone),(order_date,zone,store_id,store_name)) ORDER BY ALL;",
+      "columns": [
+        "grain",
+        "order_date",
+        "zone",
+        "store_id",
+        "store_name",
+        "orders",
+        "net_revenue"
+      ],
+      "rows": [
+        [
+          "STORE",
+          "2026-09-01",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          4,
+          "2984.70"
+        ],
+        [
+          "STORE",
+          "2026-09-01",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          4,
+          "2089.60"
+        ],
+        [
+          "STORE",
+          "2026-09-01",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          3,
+          "2141.60"
+        ],
+        [
+          "STORE",
+          "2026-09-01",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          6,
+          "2121.15"
+        ],
+        [
+          "STORE",
+          "2026-09-01",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          3,
+          "1410.80"
+        ],
+        [
+          "STORE",
+          "2026-09-01",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          6,
+          "2385.55"
+        ],
+        [
+          "STORE",
+          "2026-09-01",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          6,
+          "4583.80"
+        ],
+        [
+          "STORE",
+          "2026-09-01",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          2,
+          "803.00"
+        ],
+        [
+          "STORE",
+          "2026-09-01",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          6,
+          "2812.00"
+        ],
+        [
+          "STORE",
+          "2026-09-01",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          3,
+          "1469.10"
+        ],
+        [
+          "STORE",
+          "2026-09-01",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          6,
+          "1749.45"
+        ],
+        [
+          "STORE",
+          "2026-09-01",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          2,
+          "925.20"
+        ],
+        [
+          "STORE",
+          "2026-09-02",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          3,
+          "1019.60"
+        ],
+        [
+          "STORE",
+          "2026-09-02",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          6,
+          "2944.90"
+        ],
+        [
+          "STORE",
+          "2026-09-02",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          4,
+          "2996.90"
+        ],
+        [
+          "STORE",
+          "2026-09-02",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          1,
+          "456.00"
+        ],
+        [
+          "STORE",
+          "2026-09-02",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          3,
+          "1125.00"
+        ],
+        [
+          "STORE",
+          "2026-09-02",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          2,
+          "889.20"
+        ],
+        [
+          "STORE",
+          "2026-09-02",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          4,
+          "1559.60"
+        ],
+        [
+          "STORE",
+          "2026-09-02",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          5,
+          "3867.10"
+        ],
+        [
+          "STORE",
+          "2026-09-02",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          4,
+          "3759.50"
+        ],
+        [
+          "STORE",
+          "2026-09-02",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          5,
+          "2038.80"
+        ],
+        [
+          "STORE",
+          "2026-09-02",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          3,
+          "755.15"
+        ],
+        [
+          "STORE",
+          "2026-09-02",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          3,
+          "3762.90"
+        ],
+        [
+          "STORE",
+          "2026-09-02",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          7,
+          "3581.30"
+        ],
+        [
+          "STORE",
+          "2026-09-03",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          3,
+          "1660.45"
+        ],
+        [
+          "STORE",
+          "2026-09-03",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          4,
+          "2858.75"
+        ],
+        [
+          "STORE",
+          "2026-09-03",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          3,
+          "2344.90"
+        ],
+        [
+          "STORE",
+          "2026-09-03",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          8,
+          "5000.70"
+        ],
+        [
+          "STORE",
+          "2026-09-03",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          5,
+          "2655.00"
+        ],
+        [
+          "STORE",
+          "2026-09-03",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          6,
+          "6597.85"
+        ],
+        [
+          "STORE",
+          "2026-09-03",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          7,
+          "4328.30"
+        ],
+        [
+          "STORE",
+          "2026-09-03",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          1,
+          "138.60"
+        ],
+        [
+          "STORE",
+          "2026-09-03",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          3,
+          "2693.00"
+        ],
+        [
+          "STORE",
+          "2026-09-03",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          6,
+          "4646.80"
+        ],
+        [
+          "STORE",
+          "2026-09-03",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          2,
+          "519.30"
+        ],
+        [
+          "STORE",
+          "2026-09-03",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          6,
+          "4600.80"
+        ],
+        [
+          "STORE",
+          "2026-09-03",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          4,
+          "3316.65"
+        ],
+        [
+          "STORE",
+          "2026-09-04",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          4,
+          "1772.10"
+        ],
+        [
+          "STORE",
+          "2026-09-04",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          4,
+          "1724.70"
+        ],
+        [
+          "STORE",
+          "2026-09-04",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          6,
+          "2793.80"
+        ],
+        [
+          "STORE",
+          "2026-09-04",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          4,
+          "3590.40"
+        ],
+        [
+          "STORE",
+          "2026-09-04",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          2,
+          "427.00"
+        ],
+        [
+          "STORE",
+          "2026-09-04",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          2,
+          "1026.40"
+        ],
+        [
+          "STORE",
+          "2026-09-04",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          3,
+          "1094.40"
+        ],
+        [
+          "STORE",
+          "2026-09-04",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          3,
+          "3335.30"
+        ],
+        [
+          "STORE",
+          "2026-09-04",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          4,
+          "2157.95"
+        ],
+        [
+          "STORE",
+          "2026-09-04",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          1,
+          "298.80"
+        ],
+        [
+          "STORE",
+          "2026-09-04",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          2,
+          "3238.20"
+        ],
+        [
+          "STORE",
+          "2026-09-04",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          5,
+          "4294.30"
+        ],
+        [
+          "STORE",
+          "2026-09-04",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          4,
+          "1087.40"
+        ],
+        [
+          "STORE",
+          "2026-09-05",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          4,
+          "1460.70"
+        ],
+        [
+          "STORE",
+          "2026-09-05",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          5,
+          "3297.55"
+        ],
+        [
+          "STORE",
+          "2026-09-05",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          1,
+          "416.00"
+        ],
+        [
+          "STORE",
+          "2026-09-05",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          1,
+          "228.00"
+        ],
+        [
+          "STORE",
+          "2026-09-05",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          3,
+          "1419.55"
+        ],
+        [
+          "STORE",
+          "2026-09-05",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          1,
+          "184.45"
+        ],
+        [
+          "STORE",
+          "2026-09-05",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          2,
+          "1123.05"
+        ],
+        [
+          "STORE",
+          "2026-09-05",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          4,
+          "1286.40"
+        ],
+        [
+          "STORE",
+          "2026-09-05",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          4,
+          "3292.00"
+        ],
+        [
+          "STORE",
+          "2026-09-05",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          4,
+          "1211.00"
+        ],
+        [
+          "STORE",
+          "2026-09-05",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          4,
+          "1973.20"
+        ],
+        [
+          "STORE",
+          "2026-09-05",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          4,
+          "1239.10"
+        ],
+        [
+          "STORE",
+          "2026-09-05",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          5,
+          "2093.05"
+        ],
+        [
+          "STORE",
+          "2026-09-06",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          3,
+          "2418.20"
+        ],
+        [
+          "STORE",
+          "2026-09-06",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          3,
+          "3148.40"
+        ],
+        [
+          "STORE",
+          "2026-09-06",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          2,
+          "1650.15"
+        ],
+        [
+          "STORE",
+          "2026-09-06",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          4,
+          "3322.40"
+        ],
+        [
+          "STORE",
+          "2026-09-06",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          4,
+          "2333.80"
+        ],
+        [
+          "STORE",
+          "2026-09-06",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          3,
+          "1013.70"
+        ],
+        [
+          "STORE",
+          "2026-09-06",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          7,
+          "5448.40"
+        ],
+        [
+          "STORE",
+          "2026-09-06",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          6,
+          "3080.65"
+        ],
+        [
+          "STORE",
+          "2026-09-06",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          3,
+          "3585.00"
+        ],
+        [
+          "STORE",
+          "2026-09-06",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          6,
+          "2630.40"
+        ],
+        [
+          "STORE",
+          "2026-09-06",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          3,
+          "3087.00"
+        ],
+        [
+          "STORE",
+          "2026-09-06",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          2,
+          "307.45"
+        ],
+        [
+          "STORE",
+          "2026-09-06",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          9,
+          "8227.70"
+        ],
+        [
+          "STORE",
+          "2026-09-07",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          4,
+          "1846.40"
+        ],
+        [
+          "STORE",
+          "2026-09-07",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          3,
+          "2433.45"
+        ],
+        [
+          "STORE",
+          "2026-09-07",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          1,
+          "824.00"
+        ],
+        [
+          "STORE",
+          "2026-09-07",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          2,
+          "355.50"
+        ],
+        [
+          "STORE",
+          "2026-09-07",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          1,
+          "492.00"
+        ],
+        [
+          "STORE",
+          "2026-09-07",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          5,
+          "4380.40"
+        ],
+        [
+          "STORE",
+          "2026-09-07",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          3,
+          "2169.20"
+        ],
+        [
+          "STORE",
+          "2026-09-07",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          4,
+          "2858.55"
+        ],
+        [
+          "STORE",
+          "2026-09-07",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          4,
+          "4557.65"
+        ],
+        [
+          "STORE",
+          "2026-09-07",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          8,
+          "4869.10"
+        ],
+        [
+          "STORE",
+          "2026-09-07",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          4,
+          "1632.55"
+        ],
+        [
+          "STORE",
+          "2026-09-07",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          5,
+          "1750.90"
+        ],
+        [
+          "STORE",
+          "2026-09-08",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          5,
+          "1949.45"
+        ],
+        [
+          "STORE",
+          "2026-09-08",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          3,
+          "643.15"
+        ],
+        [
+          "STORE",
+          "2026-09-08",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          1,
+          "358.40"
+        ],
+        [
+          "STORE",
+          "2026-09-08",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          4,
+          "1378.35"
+        ],
+        [
+          "STORE",
+          "2026-09-08",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          7,
+          "2062.20"
+        ],
+        [
+          "STORE",
+          "2026-09-08",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          6,
+          "2906.65"
+        ],
+        [
+          "STORE",
+          "2026-09-08",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          3,
+          "1327.80"
+        ],
+        [
+          "STORE",
+          "2026-09-08",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          2,
+          "900.00"
+        ],
+        [
+          "STORE",
+          "2026-09-08",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          4,
+          "2877.10"
+        ],
+        [
+          "STORE",
+          "2026-09-08",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          7,
+          "4592.70"
+        ],
+        [
+          "STORE",
+          "2026-09-08",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          3,
+          "536.75"
+        ],
+        [
+          "STORE",
+          "2026-09-08",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          6,
+          "2000.30"
+        ],
+        [
+          "STORE",
+          "2026-09-08",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          7,
+          "1906.05"
+        ],
+        [
+          "STORE",
+          "2026-09-09",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          7,
+          "2912.50"
+        ],
+        [
+          "STORE",
+          "2026-09-09",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          3,
+          "1569.85"
+        ],
+        [
+          "STORE",
+          "2026-09-09",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          6,
+          "1818.20"
+        ],
+        [
+          "STORE",
+          "2026-09-09",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          4,
+          "1452.45"
+        ],
+        [
+          "STORE",
+          "2026-09-09",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          4,
+          "2014.00"
+        ],
+        [
+          "STORE",
+          "2026-09-09",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          5,
+          "3922.95"
+        ],
+        [
+          "STORE",
+          "2026-09-09",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          6,
+          "1204.70"
+        ],
+        [
+          "STORE",
+          "2026-09-09",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          4,
+          "2035.45"
+        ],
+        [
+          "STORE",
+          "2026-09-09",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          4,
+          "4084.80"
+        ],
+        [
+          "STORE",
+          "2026-09-09",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          1,
+          "414.40"
+        ],
+        [
+          "STORE",
+          "2026-09-09",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          6,
+          "2153.80"
+        ],
+        [
+          "STORE",
+          "2026-09-09",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          6,
+          "3411.60"
+        ],
+        [
+          "STORE",
+          "2026-09-10",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          5,
+          "3589.80"
+        ],
+        [
+          "STORE",
+          "2026-09-10",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          3,
+          "1917.60"
+        ],
+        [
+          "STORE",
+          "2026-09-10",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          7,
+          "2026.05"
+        ],
+        [
+          "STORE",
+          "2026-09-10",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          4,
+          "2466.15"
+        ],
+        [
+          "STORE",
+          "2026-09-10",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          10,
+          "4023.95"
+        ],
+        [
+          "STORE",
+          "2026-09-10",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          6,
+          "3511.10"
+        ],
+        [
+          "STORE",
+          "2026-09-10",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          6,
+          "6143.70"
+        ],
+        [
+          "STORE",
+          "2026-09-10",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          4,
+          "856.60"
+        ],
+        [
+          "STORE",
+          "2026-09-10",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          4,
+          "1015.80"
+        ],
+        [
+          "STORE",
+          "2026-09-10",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          1,
+          "445.00"
+        ],
+        [
+          "STORE",
+          "2026-09-10",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          3,
+          "1750.40"
+        ],
+        [
+          "STORE",
+          "2026-09-10",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          2,
+          "1519.60"
+        ],
+        [
+          "STORE",
+          "2026-09-11",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          3,
+          "3830.95"
+        ],
+        [
+          "STORE",
+          "2026-09-11",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          4,
+          "3679.90"
+        ],
+        [
+          "STORE",
+          "2026-09-11",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          3,
+          "3619.15"
+        ],
+        [
+          "STORE",
+          "2026-09-11",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          3,
+          "1113.60"
+        ],
+        [
+          "STORE",
+          "2026-09-11",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          1,
+          "688.00"
+        ],
+        [
+          "STORE",
+          "2026-09-11",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          4,
+          "1822.70"
+        ],
+        [
+          "STORE",
+          "2026-09-11",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          9,
+          "4035.75"
+        ],
+        [
+          "STORE",
+          "2026-09-11",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          5,
+          "1855.65"
+        ],
+        [
+          "STORE",
+          "2026-09-11",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          4,
+          "1392.50"
+        ],
+        [
+          "STORE",
+          "2026-09-11",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          3,
+          "2252.80"
+        ],
+        [
+          "STORE",
+          "2026-09-11",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          1,
+          "67.00"
+        ],
+        [
+          "STORE",
+          "2026-09-11",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          4,
+          "2918.35"
+        ],
+        [
+          "STORE",
+          "2026-09-12",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          3,
+          "1137.15"
+        ],
+        [
+          "STORE",
+          "2026-09-12",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          6,
+          "4337.05"
+        ],
+        [
+          "STORE",
+          "2026-09-12",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          3,
+          "394.00"
+        ],
+        [
+          "STORE",
+          "2026-09-12",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          5,
+          "2494.20"
+        ],
+        [
+          "STORE",
+          "2026-09-12",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          4,
+          "2037.50"
+        ],
+        [
+          "STORE",
+          "2026-09-12",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          3,
+          "514.40"
+        ],
+        [
+          "STORE",
+          "2026-09-12",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          6,
+          "2095.80"
+        ],
+        [
+          "STORE",
+          "2026-09-12",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          6,
+          "2780.05"
+        ],
+        [
+          "STORE",
+          "2026-09-12",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          2,
+          "1483.00"
+        ],
+        [
+          "STORE",
+          "2026-09-12",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          2,
+          "1080.00"
+        ],
+        [
+          "STORE",
+          "2026-09-12",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          8,
+          "5736.30"
+        ],
+        [
+          "STORE",
+          "2026-09-12",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          6,
+          "2916.95"
+        ],
+        [
+          "STORE",
+          "2026-09-12",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          5,
+          "5380.95"
+        ],
+        [
+          "STORE",
+          "2026-09-13",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          8,
+          "5568.15"
+        ],
+        [
+          "STORE",
+          "2026-09-13",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          5,
+          "2163.80"
+        ],
+        [
+          "STORE",
+          "2026-09-13",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          4,
+          "1084.80"
+        ],
+        [
+          "STORE",
+          "2026-09-13",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          6,
+          "4176.70"
+        ],
+        [
+          "STORE",
+          "2026-09-13",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          1,
+          "2625.00"
+        ],
+        [
+          "STORE",
+          "2026-09-13",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          4,
+          "1245.40"
+        ],
+        [
+          "STORE",
+          "2026-09-13",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          5,
+          "1648.50"
+        ],
+        [
+          "STORE",
+          "2026-09-13",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          4,
+          "3371.35"
+        ],
+        [
+          "STORE",
+          "2026-09-13",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          5,
+          "3416.80"
+        ],
+        [
+          "STORE",
+          "2026-09-13",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          3,
+          "341.00"
+        ],
+        [
+          "STORE",
+          "2026-09-13",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          5,
+          "2486.00"
+        ],
+        [
+          "STORE",
+          "2026-09-13",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          8,
+          "2737.00"
+        ],
+        [
+          "STORE",
+          "2026-09-13",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          3,
+          "944.75"
+        ],
+        [
+          "STORE",
+          "2026-09-14",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          3,
+          "836.40"
+        ],
+        [
+          "STORE",
+          "2026-09-14",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          7,
+          "5531.70"
+        ],
+        [
+          "STORE",
+          "2026-09-14",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          8,
+          "6544.90"
+        ],
+        [
+          "STORE",
+          "2026-09-14",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          3,
+          "938.45"
+        ],
+        [
+          "STORE",
+          "2026-09-14",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          7,
+          "3276.25"
+        ],
+        [
+          "STORE",
+          "2026-09-14",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          4,
+          "2203.60"
+        ],
+        [
+          "STORE",
+          "2026-09-14",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          4,
+          "2232.10"
+        ],
+        [
+          "STORE",
+          "2026-09-14",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          3,
+          "1239.00"
+        ],
+        [
+          "STORE",
+          "2026-09-14",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          3,
+          "1172.00"
+        ],
+        [
+          "STORE",
+          "2026-09-14",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          2,
+          "1329.00"
+        ],
+        [
+          "STORE",
+          "2026-09-14",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          7,
+          "3203.40"
+        ],
+        [
+          "STORE",
+          "2026-09-14",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          5,
+          "645.20"
+        ],
+        [
+          "STORE",
+          "2026-09-14",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          6,
+          "1605.00"
+        ],
+        [
+          "STORE",
+          "2026-09-15",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          2,
+          "701.50"
+        ],
+        [
+          "STORE",
+          "2026-09-15",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          6,
+          "3549.00"
+        ],
+        [
+          "STORE",
+          "2026-09-15",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          3,
+          "984.30"
+        ],
+        [
+          "STORE",
+          "2026-09-15",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          6,
+          "2470.80"
+        ],
+        [
+          "STORE",
+          "2026-09-15",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          6,
+          "4583.05"
+        ],
+        [
+          "STORE",
+          "2026-09-15",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          3,
+          "1630.30"
+        ],
+        [
+          "STORE",
+          "2026-09-15",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          4,
+          "1787.80"
+        ],
+        [
+          "STORE",
+          "2026-09-15",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          3,
+          "1882.00"
+        ],
+        [
+          "STORE",
+          "2026-09-15",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          1,
+          "411.00"
+        ],
+        [
+          "STORE",
+          "2026-09-15",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          3,
+          "1345.20"
+        ],
+        [
+          "STORE",
+          "2026-09-15",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          3,
+          "1841.80"
+        ],
+        [
+          "STORE",
+          "2026-09-15",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          8,
+          "3378.40"
+        ],
+        [
+          "STORE",
+          "2026-09-15",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          6,
+          "2743.45"
+        ],
+        [
+          "STORE",
+          "2026-09-16",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          3,
+          "2494.55"
+        ],
+        [
+          "STORE",
+          "2026-09-16",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          5,
+          "2256.55"
+        ],
+        [
+          "STORE",
+          "2026-09-16",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          5,
+          "1712.00"
+        ],
+        [
+          "STORE",
+          "2026-09-16",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          5,
+          "2403.20"
+        ],
+        [
+          "STORE",
+          "2026-09-16",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          3,
+          "1805.05"
+        ],
+        [
+          "STORE",
+          "2026-09-16",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          4,
+          "2698.00"
+        ],
+        [
+          "STORE",
+          "2026-09-16",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          7,
+          "2674.85"
+        ],
+        [
+          "STORE",
+          "2026-09-16",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          3,
+          "1231.30"
+        ],
+        [
+          "STORE",
+          "2026-09-16",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          5,
+          "2857.55"
+        ],
+        [
+          "STORE",
+          "2026-09-16",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          6,
+          "6657.20"
+        ],
+        [
+          "STORE",
+          "2026-09-16",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          5,
+          "1530.00"
+        ],
+        [
+          "STORE",
+          "2026-09-16",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          4,
+          "2000.05"
+        ],
+        [
+          "STORE",
+          "2026-09-16",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          3,
+          "873.90"
+        ],
+        [
+          "STORE",
+          "2026-09-17",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          5,
+          "2178.20"
+        ],
+        [
+          "STORE",
+          "2026-09-17",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          3,
+          "1686.90"
+        ],
+        [
+          "STORE",
+          "2026-09-17",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          5,
+          "1584.90"
+        ],
+        [
+          "STORE",
+          "2026-09-17",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          4,
+          "1914.25"
+        ],
+        [
+          "STORE",
+          "2026-09-17",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          7,
+          "3614.60"
+        ],
+        [
+          "STORE",
+          "2026-09-17",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          2,
+          "1549.95"
+        ],
+        [
+          "STORE",
+          "2026-09-17",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          5,
+          "2497.00"
+        ],
+        [
+          "STORE",
+          "2026-09-17",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          4,
+          "2410.70"
+        ],
+        [
+          "STORE",
+          "2026-09-17",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          4,
+          "1344.60"
+        ],
+        [
+          "STORE",
+          "2026-09-17",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          7,
+          "5989.15"
+        ],
+        [
+          "STORE",
+          "2026-09-17",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          4,
+          "3202.30"
+        ],
+        [
+          "STORE",
+          "2026-09-17",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          8,
+          "3680.00"
+        ],
+        [
+          "STORE",
+          "2026-09-17",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          4,
+          "3376.00"
+        ],
+        [
+          "STORE",
+          "2026-09-18",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          5,
+          "3016.60"
+        ],
+        [
+          "STORE",
+          "2026-09-18",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          1,
+          "9.00"
+        ],
+        [
+          "STORE",
+          "2026-09-18",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          3,
+          "6683.00"
+        ],
+        [
+          "STORE",
+          "2026-09-18",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          6,
+          "1973.80"
+        ],
+        [
+          "STORE",
+          "2026-09-18",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          5,
+          "1684.60"
+        ],
+        [
+          "STORE",
+          "2026-09-18",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          2,
+          "1559.70"
+        ],
+        [
+          "STORE",
+          "2026-09-18",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          2,
+          "766.00"
+        ],
+        [
+          "STORE",
+          "2026-09-18",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          1,
+          "896.00"
+        ],
+        [
+          "STORE",
+          "2026-09-18",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          6,
+          "3661.20"
+        ],
+        [
+          "STORE",
+          "2026-09-18",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          1,
+          "217.00"
+        ],
+        [
+          "STORE",
+          "2026-09-18",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          4,
+          "2700.80"
+        ],
+        [
+          "STORE",
+          "2026-09-18",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          5,
+          "2469.00"
+        ],
+        [
+          "STORE",
+          "2026-09-18",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          5,
+          "1357.10"
+        ],
+        [
+          "STORE",
+          "2026-09-19",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          3,
+          "1253.50"
+        ],
+        [
+          "STORE",
+          "2026-09-19",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          5,
+          "1374.85"
+        ],
+        [
+          "STORE",
+          "2026-09-19",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          5,
+          "1606.25"
+        ],
+        [
+          "STORE",
+          "2026-09-19",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          6,
+          "2986.80"
+        ],
+        [
+          "STORE",
+          "2026-09-19",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          7,
+          "4641.05"
+        ],
+        [
+          "STORE",
+          "2026-09-19",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          12,
+          "9205.00"
+        ],
+        [
+          "STORE",
+          "2026-09-19",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          7,
+          "4103.40"
+        ],
+        [
+          "STORE",
+          "2026-09-19",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          6,
+          "1572.20"
+        ],
+        [
+          "STORE",
+          "2026-09-19",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          4,
+          "1252.50"
+        ],
+        [
+          "STORE",
+          "2026-09-19",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          6,
+          "3268.10"
+        ],
+        [
+          "STORE",
+          "2026-09-19",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          7,
+          "7889.70"
+        ],
+        [
+          "STORE",
+          "2026-09-19",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          7,
+          "5163.90"
+        ],
+        [
+          "STORE",
+          "2026-09-19",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          6,
+          "3824.00"
+        ],
+        [
+          "STORE",
+          "2026-09-20",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          6,
+          "2346.45"
+        ],
+        [
+          "STORE",
+          "2026-09-20",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          5,
+          "933.25"
+        ],
+        [
+          "STORE",
+          "2026-09-20",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          4,
+          "4258.60"
+        ],
+        [
+          "STORE",
+          "2026-09-20",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          5,
+          "1882.65"
+        ],
+        [
+          "STORE",
+          "2026-09-20",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          7,
+          "5768.40"
+        ],
+        [
+          "STORE",
+          "2026-09-20",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          5,
+          "1357.20"
+        ],
+        [
+          "STORE",
+          "2026-09-20",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          2,
+          "98.80"
+        ],
+        [
+          "STORE",
+          "2026-09-20",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          7,
+          "2911.80"
+        ],
+        [
+          "STORE",
+          "2026-09-20",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          4,
+          "4013.10"
+        ],
+        [
+          "STORE",
+          "2026-09-20",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          3,
+          "578.00"
+        ],
+        [
+          "STORE",
+          "2026-09-20",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          6,
+          "3267.00"
+        ],
+        [
+          "STORE",
+          "2026-09-20",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          3,
+          "571.95"
+        ],
+        [
+          "STORE",
+          "2026-09-20",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          6,
+          "1929.80"
+        ],
+        [
+          "STORE",
+          "2026-09-21",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          4,
+          "2931.20"
+        ],
+        [
+          "STORE",
+          "2026-09-21",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          6,
+          "1919.75"
+        ],
+        [
+          "STORE",
+          "2026-09-21",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          6,
+          "3938.10"
+        ],
+        [
+          "STORE",
+          "2026-09-21",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          1,
+          "230.00"
+        ],
+        [
+          "STORE",
+          "2026-09-21",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          1,
+          "629.85"
+        ],
+        [
+          "STORE",
+          "2026-09-21",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          5,
+          "1736.10"
+        ],
+        [
+          "STORE",
+          "2026-09-21",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          5,
+          "1172.20"
+        ],
+        [
+          "STORE",
+          "2026-09-21",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          3,
+          "2122.30"
+        ],
+        [
+          "STORE",
+          "2026-09-21",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          3,
+          "1022.20"
+        ],
+        [
+          "STORE",
+          "2026-09-21",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          3,
+          "2690.10"
+        ],
+        [
+          "STORE",
+          "2026-09-21",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          4,
+          "1534.70"
+        ],
+        [
+          "STORE",
+          "2026-09-21",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          3,
+          "799.50"
+        ],
+        [
+          "STORE",
+          "2026-09-21",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          7,
+          "3578.05"
+        ],
+        [
+          "STORE",
+          "2026-09-22",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          7,
+          "1896.55"
+        ],
+        [
+          "STORE",
+          "2026-09-22",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          2,
+          "1873.60"
+        ],
+        [
+          "STORE",
+          "2026-09-22",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          4,
+          "1378.70"
+        ],
+        [
+          "STORE",
+          "2026-09-22",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          4,
+          "2095.85"
+        ],
+        [
+          "STORE",
+          "2026-09-22",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          3,
+          "2942.75"
+        ],
+        [
+          "STORE",
+          "2026-09-22",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          3,
+          "966.70"
+        ],
+        [
+          "STORE",
+          "2026-09-22",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          3,
+          "759.80"
+        ],
+        [
+          "STORE",
+          "2026-09-22",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          2,
+          "541.70"
+        ],
+        [
+          "STORE",
+          "2026-09-22",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          2,
+          "1761.80"
+        ],
+        [
+          "STORE",
+          "2026-09-22",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          3,
+          "1343.90"
+        ],
+        [
+          "STORE",
+          "2026-09-22",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          5,
+          "2600.40"
+        ],
+        [
+          "STORE",
+          "2026-09-22",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          2,
+          "413.70"
+        ],
+        [
+          "STORE",
+          "2026-09-23",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          11,
+          "3685.40"
+        ],
+        [
+          "STORE",
+          "2026-09-23",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          4,
+          "1037.20"
+        ],
+        [
+          "STORE",
+          "2026-09-23",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          1,
+          "411.00"
+        ],
+        [
+          "STORE",
+          "2026-09-23",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          2,
+          "672.30"
+        ],
+        [
+          "STORE",
+          "2026-09-23",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          3,
+          "2255.40"
+        ],
+        [
+          "STORE",
+          "2026-09-23",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          3,
+          "641.90"
+        ],
+        [
+          "STORE",
+          "2026-09-23",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          2,
+          "1625.65"
+        ],
+        [
+          "STORE",
+          "2026-09-23",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          5,
+          "2737.00"
+        ],
+        [
+          "STORE",
+          "2026-09-23",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          7,
+          "2447.45"
+        ],
+        [
+          "STORE",
+          "2026-09-23",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          5,
+          "2327.80"
+        ],
+        [
+          "STORE",
+          "2026-09-23",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          7,
+          "2725.45"
+        ],
+        [
+          "STORE",
+          "2026-09-23",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          6,
+          "3924.60"
+        ],
+        [
+          "STORE",
+          "2026-09-23",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          3,
+          "733.30"
+        ],
+        [
+          "STORE",
+          "2026-09-24",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          5,
+          "2161.50"
+        ],
+        [
+          "STORE",
+          "2026-09-24",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          2,
+          "696.35"
+        ],
+        [
+          "STORE",
+          "2026-09-24",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          5,
+          "2114.30"
+        ],
+        [
+          "STORE",
+          "2026-09-24",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          2,
+          "1204.80"
+        ],
+        [
+          "STORE",
+          "2026-09-24",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          2,
+          "2636.00"
+        ],
+        [
+          "STORE",
+          "2026-09-24",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          9,
+          "3552.45"
+        ],
+        [
+          "STORE",
+          "2026-09-24",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          3,
+          "1449.25"
+        ],
+        [
+          "STORE",
+          "2026-09-24",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          1,
+          "150.00"
+        ],
+        [
+          "STORE",
+          "2026-09-24",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          6,
+          "5233.70"
+        ],
+        [
+          "STORE",
+          "2026-09-24",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          4,
+          "1817.00"
+        ],
+        [
+          "STORE",
+          "2026-09-24",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          4,
+          "2085.85"
+        ],
+        [
+          "STORE",
+          "2026-09-24",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          6,
+          "2599.80"
+        ],
+        [
+          "STORE",
+          "2026-09-24",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          2,
+          "274.30"
+        ],
+        [
+          "STORE",
+          "2026-09-25",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          6,
+          "1918.30"
+        ],
+        [
+          "STORE",
+          "2026-09-25",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          4,
+          "1102.20"
+        ],
+        [
+          "STORE",
+          "2026-09-25",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          6,
+          "3030.80"
+        ],
+        [
+          "STORE",
+          "2026-09-25",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          3,
+          "633.15"
+        ],
+        [
+          "STORE",
+          "2026-09-25",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          3,
+          "1040.15"
+        ],
+        [
+          "STORE",
+          "2026-09-25",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          7,
+          "2578.45"
+        ],
+        [
+          "STORE",
+          "2026-09-25",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          2,
+          "2920.00"
+        ],
+        [
+          "STORE",
+          "2026-09-25",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          3,
+          "1076.00"
+        ],
+        [
+          "STORE",
+          "2026-09-25",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          6,
+          "4602.65"
+        ],
+        [
+          "STORE",
+          "2026-09-25",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          5,
+          "3164.20"
+        ],
+        [
+          "STORE",
+          "2026-09-25",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          8,
+          "1922.95"
+        ],
+        [
+          "STORE",
+          "2026-09-25",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          3,
+          "1197.00"
+        ],
+        [
+          "STORE",
+          "2026-09-26",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          7,
+          "2621.55"
+        ],
+        [
+          "STORE",
+          "2026-09-26",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          4,
+          "1018.15"
+        ],
+        [
+          "STORE",
+          "2026-09-26",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          4,
+          "2908.40"
+        ],
+        [
+          "STORE",
+          "2026-09-26",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          9,
+          "6688.10"
+        ],
+        [
+          "STORE",
+          "2026-09-26",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          4,
+          "2495.40"
+        ],
+        [
+          "STORE",
+          "2026-09-26",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          3,
+          "2358.15"
+        ],
+        [
+          "STORE",
+          "2026-09-26",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          4,
+          "3854.75"
+        ],
+        [
+          "STORE",
+          "2026-09-26",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          4,
+          "2081.10"
+        ],
+        [
+          "STORE",
+          "2026-09-26",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          9,
+          "7751.20"
+        ],
+        [
+          "STORE",
+          "2026-09-26",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          12,
+          "5720.40"
+        ],
+        [
+          "STORE",
+          "2026-09-26",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          3,
+          "841.25"
+        ],
+        [
+          "STORE",
+          "2026-09-26",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          2,
+          "923.30"
+        ],
+        [
+          "STORE",
+          "2026-09-26",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          2,
+          "901.00"
+        ],
+        [
+          "STORE",
+          "2026-09-27",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          3,
+          "4433.60"
+        ],
+        [
+          "STORE",
+          "2026-09-27",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          4,
+          "1663.40"
+        ],
+        [
+          "STORE",
+          "2026-09-27",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          4,
+          "2405.20"
+        ],
+        [
+          "STORE",
+          "2026-09-27",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          2,
+          "1627.20"
+        ],
+        [
+          "STORE",
+          "2026-09-27",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          2,
+          "865.55"
+        ],
+        [
+          "STORE",
+          "2026-09-27",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          3,
+          "2189.20"
+        ],
+        [
+          "STORE",
+          "2026-09-27",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          4,
+          "3110.30"
+        ],
+        [
+          "STORE",
+          "2026-09-27",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          4,
+          "831.40"
+        ],
+        [
+          "STORE",
+          "2026-09-27",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          3,
+          "2772.20"
+        ],
+        [
+          "STORE",
+          "2026-09-27",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          4,
+          "2549.25"
+        ],
+        [
+          "STORE",
+          "2026-09-27",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          7,
+          "2034.45"
+        ],
+        [
+          "STORE",
+          "2026-09-27",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          5,
+          "3638.60"
+        ],
+        [
+          "STORE",
+          "2026-09-28",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          4,
+          "1134.30"
+        ],
+        [
+          "STORE",
+          "2026-09-28",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          1,
+          "727.20"
+        ],
+        [
+          "STORE",
+          "2026-09-28",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          7,
+          "4400.00"
+        ],
+        [
+          "STORE",
+          "2026-09-28",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          2,
+          "352.00"
+        ],
+        [
+          "STORE",
+          "2026-09-28",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          7,
+          "4294.90"
+        ],
+        [
+          "STORE",
+          "2026-09-28",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          2,
+          "1189.20"
+        ],
+        [
+          "STORE",
+          "2026-09-28",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          2,
+          "1541.65"
+        ],
+        [
+          "STORE",
+          "2026-09-28",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          2,
+          "1302.00"
+        ],
+        [
+          "STORE",
+          "2026-09-28",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          3,
+          "575.60"
+        ],
+        [
+          "STORE",
+          "2026-09-28",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          5,
+          "1054.90"
+        ],
+        [
+          "STORE",
+          "2026-09-28",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          2,
+          "1108.20"
+        ],
+        [
+          "STORE",
+          "2026-09-28",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          2,
+          "1768.60"
+        ],
+        [
+          "STORE",
+          "2026-09-28",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          4,
+          "1127.25"
+        ],
+        [
+          "STORE",
+          "2026-09-29",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          1,
+          "288.15"
+        ],
+        [
+          "STORE",
+          "2026-09-29",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          8,
+          "4510.15"
+        ],
+        [
+          "STORE",
+          "2026-09-29",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          2,
+          "1136.00"
+        ],
+        [
+          "STORE",
+          "2026-09-29",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          5,
+          "2426.85"
+        ],
+        [
+          "STORE",
+          "2026-09-29",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          9,
+          "3793.40"
+        ],
+        [
+          "STORE",
+          "2026-09-29",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          7,
+          "3520.90"
+        ],
+        [
+          "STORE",
+          "2026-09-29",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          6,
+          "3491.65"
+        ],
+        [
+          "STORE",
+          "2026-09-29",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          9,
+          "6159.60"
+        ],
+        [
+          "STORE",
+          "2026-09-29",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          6,
+          "3943.95"
+        ],
+        [
+          "STORE",
+          "2026-09-29",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          1,
+          "992.00"
+        ],
+        [
+          "STORE",
+          "2026-09-29",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          1,
+          "315.00"
+        ],
+        [
+          "STORE",
+          "2026-09-29",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          2,
+          "637.30"
+        ],
+        [
+          "STORE",
+          "2026-09-29",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          7,
+          "4746.45"
+        ],
+        [
+          "STORE",
+          "2026-09-30",
+          "East",
+          "S08",
+          "Nammamart Whitefield",
+          3,
+          "557.80"
+        ],
+        [
+          "STORE",
+          "2026-09-30",
+          "East",
+          "S09",
+          "Nammamart Indiranagar",
+          1,
+          "52.25"
+        ],
+        [
+          "STORE",
+          "2026-09-30",
+          "East",
+          "S10",
+          "Nammamart Marathahalli",
+          7,
+          "3073.70"
+        ],
+        [
+          "STORE",
+          "2026-09-30",
+          "East",
+          "S11",
+          "Nammamart Hsr Layout",
+          6,
+          "4858.80"
+        ],
+        [
+          "STORE",
+          "2026-09-30",
+          "North",
+          "S01",
+          "Nammamart Hebbal",
+          2,
+          "1976.00"
+        ],
+        [
+          "STORE",
+          "2026-09-30",
+          "North",
+          "S02",
+          "Nammamart Yelahanka",
+          5,
+          "2206.40"
+        ],
+        [
+          "STORE",
+          "2026-09-30",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          1,
+          "214.00"
+        ],
+        [
+          "STORE",
+          "2026-09-30",
+          "South",
+          "S04",
+          "Nammamart Jayanagar",
+          5,
+          "1673.10"
+        ],
+        [
+          "STORE",
+          "2026-09-30",
+          "South",
+          "S05",
+          "Nammamart Jp Nagar",
+          5,
+          "3571.60"
+        ],
+        [
+          "STORE",
+          "2026-09-30",
+          "South",
+          "S06",
+          "Nammamart Banashankari",
+          5,
+          "2493.50"
+        ],
+        [
+          "STORE",
+          "2026-09-30",
+          "West",
+          "S13",
+          "Nammamart Malleshwaram",
+          5,
+          "1301.60"
+        ],
+        [
+          "STORE",
+          "2026-09-30",
+          "West",
+          "S14",
+          "Nammamart Vijayanagar",
+          2,
+          "582.45"
+        ],
+        [
+          "STORE",
+          "2026-09-30",
+          "West",
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          1,
+          "357.00"
+        ],
+        [
+          "STORE",
+          "2026-10-21",
+          "North",
+          "S03",
+          "Nammamart Rt Nagar",
+          1,
+          "986.85"
+        ],
+        [
+          "ZONE",
+          "2026-09-01",
+          "East",
+          null,
+          null,
+          17,
+          "9337.05"
+        ],
+        [
+          "ZONE",
+          "2026-09-01",
+          "North",
+          null,
+          null,
+          15,
+          "8380.15"
+        ],
+        [
+          "ZONE",
+          "2026-09-01",
+          "South",
+          null,
+          null,
+          8,
+          "3615.00"
+        ],
+        [
+          "ZONE",
+          "2026-09-01",
+          "West",
+          null,
+          null,
+          11,
+          "4143.75"
+        ],
+        [
+          "ZONE",
+          "2026-09-02",
+          "East",
+          null,
+          null,
+          14,
+          "7417.40"
+        ],
+        [
+          "ZONE",
+          "2026-09-02",
+          "North",
+          null,
+          null,
+          9,
+          "3573.80"
+        ],
+        [
+          "ZONE",
+          "2026-09-02",
+          "South",
+          null,
+          null,
+          14,
+          "9665.40"
+        ],
+        [
+          "ZONE",
+          "2026-09-02",
+          "West",
+          null,
+          null,
+          13,
+          "8099.35"
+        ],
+        [
+          "ZONE",
+          "2026-09-03",
+          "East",
+          null,
+          null,
+          18,
+          "11864.80"
+        ],
+        [
+          "ZONE",
+          "2026-09-03",
+          "North",
+          null,
+          null,
+          18,
+          "13581.15"
+        ],
+        [
+          "ZONE",
+          "2026-09-03",
+          "South",
+          null,
+          null,
+          10,
+          "7478.40"
+        ],
+        [
+          "ZONE",
+          "2026-09-03",
+          "West",
+          null,
+          null,
+          12,
+          "8436.75"
+        ],
+        [
+          "ZONE",
+          "2026-09-04",
+          "East",
+          null,
+          null,
+          18,
+          "9881.00"
+        ],
+        [
+          "ZONE",
+          "2026-09-04",
+          "North",
+          null,
+          null,
+          7,
+          "2547.80"
+        ],
+        [
+          "ZONE",
+          "2026-09-04",
+          "South",
+          null,
+          null,
+          8,
+          "5792.05"
+        ],
+        [
+          "ZONE",
+          "2026-09-04",
+          "West",
+          null,
+          null,
+          11,
+          "8619.90"
+        ],
+        [
+          "ZONE",
+          "2026-09-05",
+          "East",
+          null,
+          null,
+          11,
+          "5402.25"
+        ],
+        [
+          "ZONE",
+          "2026-09-05",
+          "North",
+          null,
+          null,
+          6,
+          "2727.05"
+        ],
+        [
+          "ZONE",
+          "2026-09-05",
+          "South",
+          null,
+          null,
+          12,
+          "5789.40"
+        ],
+        [
+          "ZONE",
+          "2026-09-05",
+          "West",
+          null,
+          null,
+          13,
+          "5305.35"
+        ],
+        [
+          "ZONE",
+          "2026-09-06",
+          "East",
+          null,
+          null,
+          12,
+          "10539.15"
+        ],
+        [
+          "ZONE",
+          "2026-09-06",
+          "North",
+          null,
+          null,
+          14,
+          "8795.90"
+        ],
+        [
+          "ZONE",
+          "2026-09-06",
+          "South",
+          null,
+          null,
+          15,
+          "9296.05"
+        ],
+        [
+          "ZONE",
+          "2026-09-06",
+          "West",
+          null,
+          null,
+          14,
+          "11622.15"
+        ],
+        [
+          "ZONE",
+          "2026-09-07",
+          "East",
+          null,
+          null,
+          8,
+          "5103.85"
+        ],
+        [
+          "ZONE",
+          "2026-09-07",
+          "North",
+          null,
+          null,
+          8,
+          "5227.90"
+        ],
+        [
+          "ZONE",
+          "2026-09-07",
+          "South",
+          null,
+          null,
+          11,
+          "9585.40"
+        ],
+        [
+          "ZONE",
+          "2026-09-07",
+          "West",
+          null,
+          null,
+          17,
+          "8252.55"
+        ],
+        [
+          "ZONE",
+          "2026-09-08",
+          "East",
+          null,
+          null,
+          13,
+          "4329.35"
+        ],
+        [
+          "ZONE",
+          "2026-09-08",
+          "North",
+          null,
+          null,
+          16,
+          "6296.65"
+        ],
+        [
+          "ZONE",
+          "2026-09-08",
+          "South",
+          null,
+          null,
+          13,
+          "8369.80"
+        ],
+        [
+          "ZONE",
+          "2026-09-08",
+          "West",
+          null,
+          null,
+          16,
+          "4443.10"
+        ],
+        [
+          "ZONE",
+          "2026-09-09",
+          "East",
+          null,
+          null,
+          20,
+          "7753.00"
+        ],
+        [
+          "ZONE",
+          "2026-09-09",
+          "North",
+          null,
+          null,
+          9,
+          "5936.95"
+        ],
+        [
+          "ZONE",
+          "2026-09-09",
+          "South",
+          null,
+          null,
+          14,
+          "7324.95"
+        ],
+        [
+          "ZONE",
+          "2026-09-09",
+          "West",
+          null,
+          null,
+          13,
+          "5979.80"
+        ],
+        [
+          "ZONE",
+          "2026-09-10",
+          "East",
+          null,
+          null,
+          19,
+          "9999.60"
+        ],
+        [
+          "ZONE",
+          "2026-09-10",
+          "North",
+          null,
+          null,
+          22,
+          "13678.75"
+        ],
+        [
+          "ZONE",
+          "2026-09-10",
+          "South",
+          null,
+          null,
+          9,
+          "2317.40"
+        ],
+        [
+          "ZONE",
+          "2026-09-10",
+          "West",
+          null,
+          null,
+          5,
+          "3270.00"
+        ],
+        [
+          "ZONE",
+          "2026-09-11",
+          "East",
+          null,
+          null,
+          13,
+          "12243.60"
+        ],
+        [
+          "ZONE",
+          "2026-09-11",
+          "North",
+          null,
+          null,
+          14,
+          "6546.45"
+        ],
+        [
+          "ZONE",
+          "2026-09-11",
+          "South",
+          null,
+          null,
+          9,
+          "3248.15"
+        ],
+        [
+          "ZONE",
+          "2026-09-11",
+          "West",
+          null,
+          null,
+          8,
+          "5238.15"
+        ],
+        [
+          "ZONE",
+          "2026-09-12",
+          "East",
+          null,
+          null,
+          17,
+          "8362.40"
+        ],
+        [
+          "ZONE",
+          "2026-09-12",
+          "North",
+          null,
+          null,
+          13,
+          "4647.70"
+        ],
+        [
+          "ZONE",
+          "2026-09-12",
+          "South",
+          null,
+          null,
+          10,
+          "5343.05"
+        ],
+        [
+          "ZONE",
+          "2026-09-12",
+          "West",
+          null,
+          null,
+          19,
+          "14034.20"
+        ],
+        [
+          "ZONE",
+          "2026-09-13",
+          "East",
+          null,
+          null,
+          23,
+          "12993.45"
+        ],
+        [
+          "ZONE",
+          "2026-09-13",
+          "North",
+          null,
+          null,
+          10,
+          "5518.90"
+        ],
+        [
+          "ZONE",
+          "2026-09-13",
+          "South",
+          null,
+          null,
+          12,
+          "7129.15"
+        ],
+        [
+          "ZONE",
+          "2026-09-13",
+          "West",
+          null,
+          null,
+          16,
+          "6167.75"
+        ],
+        [
+          "ZONE",
+          "2026-09-14",
+          "East",
+          null,
+          null,
+          21,
+          "13851.45"
+        ],
+        [
+          "ZONE",
+          "2026-09-14",
+          "North",
+          null,
+          null,
+          15,
+          "7711.95"
+        ],
+        [
+          "ZONE",
+          "2026-09-14",
+          "South",
+          null,
+          null,
+          8,
+          "3740.00"
+        ],
+        [
+          "ZONE",
+          "2026-09-14",
+          "West",
+          null,
+          null,
+          18,
+          "5453.60"
+        ],
+        [
+          "ZONE",
+          "2026-09-15",
+          "East",
+          null,
+          null,
+          17,
+          "7705.60"
+        ],
+        [
+          "ZONE",
+          "2026-09-15",
+          "North",
+          null,
+          null,
+          13,
+          "8001.15"
+        ],
+        [
+          "ZONE",
+          "2026-09-15",
+          "South",
+          null,
+          null,
+          7,
+          "3638.20"
+        ],
+        [
+          "ZONE",
+          "2026-09-15",
+          "West",
+          null,
+          null,
+          17,
+          "7963.65"
+        ],
+        [
+          "ZONE",
+          "2026-09-16",
+          "East",
+          null,
+          null,
+          18,
+          "8866.30"
+        ],
+        [
+          "ZONE",
+          "2026-09-16",
+          "North",
+          null,
+          null,
+          14,
+          "7177.90"
+        ],
+        [
+          "ZONE",
+          "2026-09-16",
+          "South",
+          null,
+          null,
+          14,
+          "10746.05"
+        ],
+        [
+          "ZONE",
+          "2026-09-16",
+          "West",
+          null,
+          null,
+          12,
+          "4403.95"
+        ],
+        [
+          "ZONE",
+          "2026-09-17",
+          "East",
+          null,
+          null,
+          17,
+          "7364.25"
+        ],
+        [
+          "ZONE",
+          "2026-09-17",
+          "North",
+          null,
+          null,
+          14,
+          "7661.55"
+        ],
+        [
+          "ZONE",
+          "2026-09-17",
+          "South",
+          null,
+          null,
+          15,
+          "9744.45"
+        ],
+        [
+          "ZONE",
+          "2026-09-17",
+          "West",
+          null,
+          null,
+          16,
+          "10258.30"
+        ],
+        [
+          "ZONE",
+          "2026-09-18",
+          "East",
+          null,
+          null,
+          15,
+          "11682.40"
+        ],
+        [
+          "ZONE",
+          "2026-09-18",
+          "North",
+          null,
+          null,
+          9,
+          "4010.30"
+        ],
+        [
+          "ZONE",
+          "2026-09-18",
+          "South",
+          null,
+          null,
+          8,
+          "4774.20"
+        ],
+        [
+          "ZONE",
+          "2026-09-18",
+          "West",
+          null,
+          null,
+          14,
+          "6526.90"
+        ],
+        [
+          "ZONE",
+          "2026-09-19",
+          "East",
+          null,
+          null,
+          19,
+          "7221.40"
+        ],
+        [
+          "ZONE",
+          "2026-09-19",
+          "North",
+          null,
+          null,
+          26,
+          "17949.45"
+        ],
+        [
+          "ZONE",
+          "2026-09-19",
+          "South",
+          null,
+          null,
+          16,
+          "6092.80"
+        ],
+        [
+          "ZONE",
+          "2026-09-19",
+          "West",
+          null,
+          null,
+          20,
+          "16877.60"
+        ],
+        [
+          "ZONE",
+          "2026-09-20",
+          "East",
+          null,
+          null,
+          20,
+          "9420.95"
+        ],
+        [
+          "ZONE",
+          "2026-09-20",
+          "North",
+          null,
+          null,
+          14,
+          "7224.40"
+        ],
+        [
+          "ZONE",
+          "2026-09-20",
+          "South",
+          null,
+          null,
+          14,
+          "7502.90"
+        ],
+        [
+          "ZONE",
+          "2026-09-20",
+          "West",
+          null,
+          null,
+          15,
+          "5768.75"
+        ],
+        [
+          "ZONE",
+          "2026-09-21",
+          "East",
+          null,
+          null,
+          17,
+          "9019.05"
+        ],
+        [
+          "ZONE",
+          "2026-09-21",
+          "North",
+          null,
+          null,
+          11,
+          "3538.15"
+        ],
+        [
+          "ZONE",
+          "2026-09-21",
+          "South",
+          null,
+          null,
+          9,
+          "5834.60"
+        ],
+        [
+          "ZONE",
+          "2026-09-21",
+          "West",
+          null,
+          null,
+          14,
+          "5912.25"
+        ],
+        [
+          "ZONE",
+          "2026-09-22",
+          "East",
+          null,
+          null,
+          17,
+          "7244.70"
+        ],
+        [
+          "ZONE",
+          "2026-09-22",
+          "North",
+          null,
+          null,
+          6,
+          "3909.45"
+        ],
+        [
+          "ZONE",
+          "2026-09-22",
+          "South",
+          null,
+          null,
+          7,
+          "3063.30"
+        ],
+        [
+          "ZONE",
+          "2026-09-22",
+          "West",
+          null,
+          null,
+          10,
+          "4358.00"
+        ],
+        [
+          "ZONE",
+          "2026-09-23",
+          "East",
+          null,
+          null,
+          18,
+          "5805.90"
+        ],
+        [
+          "ZONE",
+          "2026-09-23",
+          "North",
+          null,
+          null,
+          8,
+          "4522.95"
+        ],
+        [
+          "ZONE",
+          "2026-09-23",
+          "South",
+          null,
+          null,
+          17,
+          "7512.25"
+        ],
+        [
+          "ZONE",
+          "2026-09-23",
+          "West",
+          null,
+          null,
+          16,
+          "7383.35"
+        ],
+        [
+          "ZONE",
+          "2026-09-24",
+          "East",
+          null,
+          null,
+          14,
+          "6176.95"
+        ],
+        [
+          "ZONE",
+          "2026-09-24",
+          "North",
+          null,
+          null,
+          14,
+          "7637.70"
+        ],
+        [
+          "ZONE",
+          "2026-09-24",
+          "South",
+          null,
+          null,
+          11,
+          "7200.70"
+        ],
+        [
+          "ZONE",
+          "2026-09-24",
+          "West",
+          null,
+          null,
+          12,
+          "4959.95"
+        ],
+        [
+          "ZONE",
+          "2026-09-25",
+          "East",
+          null,
+          null,
+          19,
+          "6684.45"
+        ],
+        [
+          "ZONE",
+          "2026-09-25",
+          "North",
+          null,
+          null,
+          10,
+          "3618.60"
+        ],
+        [
+          "ZONE",
+          "2026-09-25",
+          "South",
+          null,
+          null,
+          11,
+          "8598.65"
+        ],
+        [
+          "ZONE",
+          "2026-09-25",
+          "West",
+          null,
+          null,
+          16,
+          "6284.15"
+        ],
+        [
+          "ZONE",
+          "2026-09-26",
+          "East",
+          null,
+          null,
+          24,
+          "13236.20"
+        ],
+        [
+          "ZONE",
+          "2026-09-26",
+          "North",
+          null,
+          null,
+          11,
+          "8708.30"
+        ],
+        [
+          "ZONE",
+          "2026-09-26",
+          "South",
+          null,
+          null,
+          25,
+          "15552.70"
+        ],
+        [
+          "ZONE",
+          "2026-09-26",
+          "West",
+          null,
+          null,
+          7,
+          "2665.55"
+        ],
+        [
+          "ZONE",
+          "2026-09-27",
+          "East",
+          null,
+          null,
+          13,
+          "10129.40"
+        ],
+        [
+          "ZONE",
+          "2026-09-27",
+          "North",
+          null,
+          null,
+          5,
+          "3054.75"
+        ],
+        [
+          "ZONE",
+          "2026-09-27",
+          "South",
+          null,
+          null,
+          11,
+          "6713.90"
+        ],
+        [
+          "ZONE",
+          "2026-09-27",
+          "West",
+          null,
+          null,
+          16,
+          "8222.30"
+        ],
+        [
+          "ZONE",
+          "2026-09-28",
+          "East",
+          null,
+          null,
+          14,
+          "6613.50"
+        ],
+        [
+          "ZONE",
+          "2026-09-28",
+          "North",
+          null,
+          null,
+          11,
+          "7025.75"
+        ],
+        [
+          "ZONE",
+          "2026-09-28",
+          "South",
+          null,
+          null,
+          10,
+          "2932.50"
+        ],
+        [
+          "ZONE",
+          "2026-09-28",
+          "West",
+          null,
+          null,
+          8,
+          "4004.05"
+        ],
+        [
+          "ZONE",
+          "2026-09-29",
+          "East",
+          null,
+          null,
+          16,
+          "8361.15"
+        ],
+        [
+          "ZONE",
+          "2026-09-29",
+          "North",
+          null,
+          null,
+          22,
+          "10805.95"
+        ],
+        [
+          "ZONE",
+          "2026-09-29",
+          "South",
+          null,
+          null,
+          16,
+          "11095.55"
+        ],
+        [
+          "ZONE",
+          "2026-09-29",
+          "West",
+          null,
+          null,
+          10,
+          "5698.75"
+        ],
+        [
+          "ZONE",
+          "2026-09-30",
+          "East",
+          null,
+          null,
+          17,
+          "8542.55"
+        ],
+        [
+          "ZONE",
+          "2026-09-30",
+          "North",
+          null,
+          null,
+          8,
+          "4396.40"
+        ],
+        [
+          "ZONE",
+          "2026-09-30",
+          "South",
+          null,
+          null,
+          15,
+          "7738.20"
+        ],
+        [
+          "ZONE",
+          "2026-09-30",
+          "West",
+          null,
+          null,
+          8,
+          "2241.05"
+        ],
+        [
+          "ZONE",
+          "2026-10-21",
+          "North",
+          null,
+          null,
+          1,
+          "986.85"
+        ]
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Category revenue and gross margin.",
+      "sql": "SELECT category,count(*) orders,sum(net_revenue) net_revenue,sum(gross_margin) gross_margin FROM etl_fact_orders JOIN etl_dim_product USING(product_id) GROUP BY category ORDER BY net_revenue DESC;",
+      "columns": [
+        "category",
+        "orders",
+        "net_revenue",
+        "gross_margin"
+      ],
+      "rows": [
+        [
+          "Staples",
+          221,
+          "199109.80",
+          "51414.81"
+        ],
+        [
+          "Personal Care",
+          259,
+          "168524.10",
+          "38130.72"
+        ],
+        [
+          "Household",
+          268,
+          "158996.05",
+          "40273.76"
+        ],
+        [
+          "Snacks & Beverages",
+          272,
+          "142114.15",
+          "32677.61"
+        ],
+        [
+          "Dairy & Bakery",
+          318,
+          "138904.90",
+          "36519.07"
+        ],
+        [
+          "Fruits & Vegetables",
+          290,
+          "70934.90",
+          "17106.33"
+        ]
+      ]
+    },
+    {
+      "number": 3,
+      "title": "All operationally valid delivered orders, independent of payment collection.",
+      "sql": "SELECT store_id,store_name,count(*) delivered_orders,round(avg(delivery_minutes),2) average_delivery_minutes,\nround(100.0*count(*) FILTER(WHERE within_15_min)/count(*),2) within_15_min_pct\nFROM etl_orders JOIN etl_dim_store USING(store_id) WHERE order_status='DELIVERED' GROUP BY store_id,store_name ORDER BY store_id;",
+      "columns": [
+        "store_id",
+        "store_name",
+        "delivered_orders",
+        "average_delivery_minutes",
+        "within_15_min_pct"
+      ],
+      "rows": [
+        [
+          "S01",
+          "Nammamart Hebbal",
+          140,
+          20.69,
+          30.71
+        ],
+        [
+          "S02",
+          "Nammamart Yelahanka",
+          138,
+          20.93,
+          31.16
+        ],
+        [
+          "S03",
+          "Nammamart Rt Nagar",
+          138,
+          20.69,
+          28.99
+        ],
+        [
+          "S04",
+          "Nammamart Jayanagar",
+          129,
+          21.67,
+          26.36
+        ],
+        [
+          "S05",
+          "Nammamart Jp Nagar",
+          133,
+          21.34,
+          28.57
+        ],
+        [
+          "S06",
+          "Nammamart Banashankari",
+          145,
+          22.33,
+          22.07
+        ],
+        [
+          "S08",
+          "Nammamart Whitefield",
+          155,
+          20.6,
+          35.48
+        ],
+        [
+          "S09",
+          "Nammamart Indiranagar",
+          127,
+          21.14,
+          27.56
+        ],
+        [
+          "S10",
+          "Nammamart Marathahalli",
+          139,
+          21.77,
+          27.34
+        ],
+        [
+          "S11",
+          "Nammamart Hsr Layout",
+          144,
+          20.97,
+          27.78
+        ],
+        [
+          "S13",
+          "Nammamart Malleshwaram",
+          135,
+          21.79,
+          26.67
+        ],
+        [
+          "S14",
+          "Nammamart Vijayanagar",
+          162,
+          21.5,
+          31.48
+        ],
+        [
+          "S15",
+          "Nammamart Basaveshwaranagar",
+          143,
+          22.33,
+          20.98
+        ]
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Finance revenue and every reconciliation exception, including rejected/orphan records.",
+      "sql": "WITH r AS (SELECT payment_mode,sum(net_revenue) revenue FROM etl_fact_orders GROUP BY payment_mode),\nm AS (SELECT coalesce(payment_mode,'UNKNOWN') payment_mode,sum(abs(amount_difference)) mismatch,count(*) mismatch_orders FROM etl_payment_reconciliation GROUP BY 1),\nx AS (SELECT coalesce(r.payment_mode,m.payment_mode) payment_mode,coalesce(revenue,0) revenue,coalesce(mismatch,0) mismatch,coalesce(mismatch_orders,0) mismatch_orders FROM r FULL JOIN m USING(payment_mode))\nSELECT coalesce(payment_mode,'ALL') payment_mode,sum(revenue) net_revenue,sum(mismatch) absolute_unreconciled_amount,sum(mismatch_orders) mismatch_orders FROM x GROUP BY GROUPING SETS((payment_mode),()) ORDER BY payment_mode;",
+      "columns": [
+        "payment_mode",
+        "net_revenue",
+        "absolute_unreconciled_amount",
+        "mismatch_orders"
+      ],
+      "rows": [
+        [
+          "ALL",
+          "878583.90",
+          "127937.17",
+          254
+        ],
+        [
+          "CARD",
+          "174952.30",
+          "31776.10",
+          67
+        ],
+        [
+          "CASH ON DELIVERY",
+          "114091.75",
+          "30777.65",
+          49
+        ],
+        [
+          "CASHH",
+          "0.00",
+          "25.00",
+          2
+        ],
+        [
+          "COD",
+          "0.00",
+          "0.00",
+          1
+        ],
+        [
+          "UNKNOWN",
+          "0.00",
+          "4580.57",
+          8
+        ],
+        [
+          "UPI",
+          "491377.50",
+          "43260.55",
+          91
+        ],
+        [
+          "WALLET",
+          "98162.35",
+          "17517.30",
+          36
+        ]
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Top ten customers by reconciled spend, with loyalty tier and no contacts.",
+      "sql": "SELECT customer_id,loyalty_tier,count(*) orders,sum(net_revenue) total_spend FROM etl_fact_orders JOIN etl_dim_customer USING(customer_id) GROUP BY customer_id,loyalty_tier ORDER BY total_spend DESC,customer_id LIMIT 10;",
+      "columns": [
+        "customer_id",
+        "loyalty_tier",
+        "orders",
+        "total_spend"
+      ],
+      "rows": [
+        [
+          "C00310",
+          "BRONZE",
+          8,
+          "7258.95"
+        ],
+        [
+          "C00072",
+          "SILVER",
+          11,
+          "6433.95"
+        ],
+        [
+          "C00236",
+          "PLATINUM",
+          8,
+          "6105.80"
+        ],
+        [
+          "C00202",
+          "SILVER",
+          6,
+          "5988.75"
+        ],
+        [
+          "C00115",
+          "BRONZE",
+          6,
+          "5783.70"
+        ],
+        [
+          "C00105",
+          "GOLD",
+          5,
+          "5702.85"
+        ],
+        [
+          "C00135",
+          "BRONZE",
+          7,
+          "5693.20"
+        ],
+        [
+          "C00163",
+          "PLATINUM",
+          5,
+          "5671.50"
+        ],
+        [
+          "C00064",
+          "BRONZE",
+          8,
+          "5609.25"
+        ],
+        [
+          "C00209",
+          "PLATINUM",
+          7,
+          "5315.40"
+        ]
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Rejection occurrences across all runs today in IST, grouped by source and reason.",
+      "sql": "SELECT source_file,failure_reason,count(*) rejected_rows FROM etl_rejected_rows WHERE cast(timezone('Asia/Kolkata',checked_at) AS DATE)=cast(timezone('Asia/Kolkata',current_timestamp) AS DATE) GROUP BY source_file,failure_reason ORDER BY ALL;",
+      "columns": [
+        "source_file",
+        "failure_reason",
+        "rejected_rows"
+      ],
+      "rows": [
+        [
+          "customers.csv",
+          "customer_future_signup",
+          3
+        ],
+        [
+          "orders.csv",
+          "order_amount",
+          18
+        ],
+        [
+          "orders.csv",
+          "order_customer_key",
+          18
+        ],
+        [
+          "orders.csv",
+          "order_customer_quality",
+          18
+        ],
+        [
+          "orders.csv",
+          "order_customer_required",
+          18
+        ],
+        [
+          "orders.csv",
+          "order_delivery_limit",
+          6
+        ],
+        [
+          "orders.csv",
+          "order_delivery_required",
+          8
+        ],
+        [
+          "orders.csv",
+          "order_discount",
+          3
+        ],
+        [
+          "orders.csv",
+          "order_duplicate",
+          24
+        ],
+        [
+          "orders.csv",
+          "order_future_timestamp",
+          5
+        ],
+        [
+          "orders.csv",
+          "order_payment_amount",
+          14
+        ],
+        [
+          "orders.csv",
+          "order_payment_mode",
+          3
+        ],
+        [
+          "orders.csv",
+          "order_payment_quality",
+          13
+        ],
+        [
+          "orders.csv",
+          "order_product_key",
+          9
+        ],
+        [
+          "orders.csv",
+          "order_product_quality",
+          126
+        ],
+        [
+          "orders.csv",
+          "order_quantity",
+          10
+        ],
+        [
+          "orders.csv",
+          "order_status",
+          3
+        ],
+        [
+          "orders.csv",
+          "order_store_key",
+          5
+        ],
+        [
+          "orders.csv",
+          "order_store_quality",
+          311
+        ],
+        [
+          "orders.csv",
+          "order_timestamp",
+          6
+        ],
+        [
+          "orders_2026-10-01_increment.csv",
+          "order_customer_quality",
+          1
+        ],
+        [
+          "orders_2026-10-01_increment.csv",
+          "order_product_quality",
+          14
+        ],
+        [
+          "orders_2026-10-01_increment.csv",
+          "order_store_quality",
+          13
+        ],
+        [
+          "payments.csv",
+          "payment_amount",
+          6
+        ],
+        [
+          "payments.csv",
+          "payment_duplicate",
+          8
+        ],
+        [
+          "payments.csv",
+          "payment_mode",
+          3
+        ],
+        [
+          "payments.csv",
+          "payment_order_key",
+          8
+        ],
+        [
+          "products.csv",
+          "product_category_required",
+          3
+        ],
+        [
+          "products.csv",
+          "product_cost_mrp",
+          5
+        ],
+        [
+          "products.csv",
+          "product_mrp",
+          1
+        ],
+        [
+          "stores.csv",
+          "store_capacity",
+          1
+        ],
+        [
+          "stores.csv",
+          "store_zone",
+          1
+        ]
+      ]
+    }
+  ],
+  "table_evidence": {
+    "dq_results": {
+      "sql": "SELECT * FROM dq_results WHERE run_id=? ORDER BY dimension,check_name",
+      "columns": [
+        "run_id",
+        "dag_id",
+        "check_name",
+        "dimension",
+        "severity",
+        "rows_checked",
+        "rows_failed",
+        "status",
+        "checked_at"
+      ],
+      "rows": [
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_amount",
+          "Accuracy",
+          "Critical",
+          2412,
+          18,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_delivery_limit",
+          "Accuracy",
+          "Critical",
+          2412,
+          6,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_quantity",
+          "Accuracy",
+          "Critical",
+          2412,
+          10,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_unit_price",
+          "Accuracy",
+          "Critical",
+          2412,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.payment_amount",
+          "Accuracy",
+          "Critical",
+          2228,
+          6,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.product_cost_mrp",
+          "Accuracy",
+          "Critical",
+          152,
+          5,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.product_mrp",
+          "Accuracy",
+          "Critical",
+          152,
+          1,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.store_capacity",
+          "Accuracy",
+          "Critical",
+          15,
+          1,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_amount",
+          "Accuracy",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_delivery_limit",
+          "Accuracy",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_quantity",
+          "Accuracy",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_unit_price",
+          "Accuracy",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "order_price_distribution",
+          "Accuracy",
+          "Warning",
+          18,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.customer_key_required",
+          "Completeness",
+          "Critical",
+          405,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_customer_required",
+          "Completeness",
+          "Critical",
+          2412,
+          18,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_delivery_required",
+          "Completeness",
+          "Critical",
+          2412,
+          8,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_key_required",
+          "Completeness",
+          "Critical",
+          2412,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.payment_key_required",
+          "Completeness",
+          "Critical",
+          2228,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.product_category_required",
+          "Completeness",
+          "Critical",
+          152,
+          3,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.product_key_required",
+          "Completeness",
+          "Critical",
+          152,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.store_key_required",
+          "Completeness",
+          "Critical",
+          15,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.store_manager",
+          "Completeness",
+          "Warning",
+          15,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_customer_required",
+          "Completeness",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_delivery_required",
+          "Completeness",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_key_required",
+          "Completeness",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "order_volume",
+          "Completeness",
+          "Warning",
+          1,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.customer_loyalty_casing",
+          "Consistency",
+          "Warning",
+          405,
+          8,
+          "Warning",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_customer_key",
+          "Consistency",
+          "Critical",
+          2412,
+          18,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_customer_quality",
+          "Consistency",
+          "Critical",
+          2412,
+          18,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_customer_warning",
+          "Consistency",
+          "Warning",
+          2412,
+          227,
+          "Warning",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_payment_amount",
+          "Consistency",
+          "Critical",
+          2412,
+          14,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_payment_quality",
+          "Consistency",
+          "Critical",
+          2412,
+          13,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_product_key",
+          "Consistency",
+          "Critical",
+          2412,
+          9,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_product_quality",
+          "Consistency",
+          "Critical",
+          2412,
+          126,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_product_warning",
+          "Consistency",
+          "Warning",
+          2412,
+          35,
+          "Warning",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_store_key",
+          "Consistency",
+          "Critical",
+          2412,
+          5,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_store_quality",
+          "Consistency",
+          "Critical",
+          2412,
+          311,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_store_warning",
+          "Consistency",
+          "Warning",
+          2412,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.payment_order_key",
+          "Consistency",
+          "Critical",
+          2228,
+          8,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_customer_key",
+          "Consistency",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_customer_quality",
+          "Consistency",
+          "Critical",
+          160,
+          1,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_customer_warning",
+          "Consistency",
+          "Warning",
+          160,
+          14,
+          "Warning",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_payment_amount",
+          "Consistency",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_payment_quality",
+          "Consistency",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_product_key",
+          "Consistency",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_product_quality",
+          "Consistency",
+          "Critical",
+          160,
+          14,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_product_warning",
+          "Consistency",
+          "Warning",
+          160,
+          3,
+          "Warning",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_store_key",
+          "Consistency",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_store_quality",
+          "Consistency",
+          "Critical",
+          160,
+          13,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_store_warning",
+          "Consistency",
+          "Warning",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.customer_future_signup",
+          "Timeliness",
+          "Critical",
+          405,
+          3,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_future_timestamp",
+          "Timeliness",
+          "Critical",
+          2412,
+          5,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_future_timestamp",
+          "Timeliness",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "order_freshness",
+          "Timeliness",
+          "Warning",
+          1,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.customer_duplicate",
+          "Uniqueness",
+          "Warning",
+          405,
+          10,
+          "Warning",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_duplicate",
+          "Uniqueness",
+          "Critical",
+          2412,
+          24,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.payment_duplicate",
+          "Uniqueness",
+          "Critical",
+          2228,
+          8,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.product_duplicate",
+          "Uniqueness",
+          "Warning",
+          152,
+          4,
+          "Warning",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.store_duplicate",
+          "Uniqueness",
+          "Warning",
+          15,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_duplicate",
+          "Uniqueness",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.customer_email",
+          "Validity",
+          "Warning",
+          405,
+          12,
+          "Warning",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.customer_phone",
+          "Validity",
+          "Warning",
+          405,
+          7,
+          "Warning",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.customer_pincode",
+          "Validity",
+          "Warning",
+          405,
+          3,
+          "Warning",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.customer_signup_date",
+          "Validity",
+          "Critical",
+          405,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_discount",
+          "Validity",
+          "Critical",
+          2412,
+          3,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_payment_mode",
+          "Validity",
+          "Critical",
+          2412,
+          3,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_status",
+          "Validity",
+          "Critical",
+          2412,
+          3,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.order_timestamp",
+          "Validity",
+          "Critical",
+          2412,
+          6,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.payment_mode",
+          "Validity",
+          "Critical",
+          2228,
+          3,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.payment_status",
+          "Validity",
+          "Critical",
+          2228,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.payment_timestamp",
+          "Validity",
+          "Critical",
+          2228,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.store_pincode",
+          "Validity",
+          "Warning",
+          15,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "base.store_zone",
+          "Validity",
+          "Critical",
+          15,
+          1,
+          "Failed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_discount",
+          "Validity",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_payment_mode",
+          "Validity",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_status",
+          "Validity",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "increment.order_timestamp",
+          "Validity",
+          "Critical",
+          160,
+          0,
+          "Passed",
+          "2026-10-22 03:56:08.582679+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "schema.customers.csv",
+          "Validity",
+          "Critical",
+          1,
+          0,
+          "Passed",
+          "2026-10-22 03:56:45.257399+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "schema.orders.csv",
+          "Validity",
+          "Critical",
+          1,
+          0,
+          "Passed",
+          "2026-10-22 03:56:45.088132+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "schema.orders_2026-10-01_increment.csv",
+          "Validity",
+          "Critical",
+          1,
+          0,
+          "Passed",
+          "2026-10-22 03:56:45.309081+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "schema.payments.csv",
+          "Validity",
+          "Critical",
+          1,
+          0,
+          "Passed",
+          "2026-10-22 03:56:45.231637+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "schema.products.csv",
+          "Validity",
+          "Critical",
+          1,
+          0,
+          "Passed",
+          "2026-10-22 03:56:45.278110+00:00"
+        ],
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "schema.stores.csv",
+          "Validity",
+          "Critical",
+          1,
+          0,
+          "Passed",
+          "2026-10-22 03:56:45.289885+00:00"
+        ]
+      ]
+    },
+    "pipeline_runs": {
+      "sql": "SELECT * FROM pipeline_runs ORDER BY end_time DESC LIMIT 3",
+      "columns": [
+        "run_id",
+        "dag_id",
+        "start_time",
+        "end_time",
+        "rows_extracted",
+        "rows_loaded",
+        "rows_quarantined",
+        "status"
+      ],
+      "rows": [
+        [
+          "submission_20261022_035604_etl",
+          "nammamart_etl_sudatta",
+          "2026-10-22 03:56:08.582679+00:00",
+          "2026-10-22 03:56:46.121518+00:00",
+          5372,
+          1628,
+          604,
+          "success"
+        ]
+      ]
+    },
+    "etl_payment_reconciliation": {
+      "sql": "SELECT order_id,order_amount,amount_paid,reason FROM etl_payment_reconciliation ORDER BY order_id LIMIT 12",
+      "columns": [
+        "order_id",
+        "order_amount",
+        "amount_paid",
+        "reason"
+      ],
+      "rows": [
+        [
+          "ORD000057",
+          "1346.40",
+          null,
+          "no successful payment"
+        ],
+        [
+          "ORD000085",
+          "424.80",
+          null,
+          "missing payment"
+        ],
+        [
+          "ORD000090",
+          "497.00",
+          null,
+          "no successful payment"
+        ],
+        [
+          "ORD000094",
+          "403.20",
+          "403.20",
+          "duplicate payment_id; payment quality failure"
+        ],
+        [
+          "ORD000106",
+          "2332.80",
+          null,
+          "no successful payment"
+        ],
+        [
+          "ORD000127",
+          "164.00",
+          null,
+          "missing payment"
+        ],
+        [
+          "ORD000178",
+          "378.00",
+          "353.00",
+          "payment amount mismatch"
+        ],
+        [
+          "ORD000187",
+          "193.60",
+          null,
+          "no successful payment"
+        ],
+        [
+          "ORD000188",
+          "94.50",
+          "94.50",
+          "duplicate payment_id; payment quality failure"
+        ],
+        [
+          "ORD000371",
+          "980.40",
+          "955.40",
+          "payment amount mismatch"
+        ],
+        [
+          "ORD000381",
+          "1110.00",
+          null,
+          "no successful payment"
+        ],
+        [
+          "ORD000389",
+          "1884.00",
+          null,
+          "no successful payment"
+        ]
+      ]
+    }
+  }
+}

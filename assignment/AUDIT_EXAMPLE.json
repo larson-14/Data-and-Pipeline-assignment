@@ -1,0 +1,27 @@
+{
+  "order_id": "ORD000469",
+  "source_file": "orders.csv",
+  "source_data_row": 126,
+  "source_sha256": "c4e7a190561370fcd0ce992af2ccb72f8818927bbd5bae7c0951a20d30226362",
+  "as_received": {
+    "order_id": "ORD000469",
+    "order_ts": "2026-09-07 11:52:46",
+    "customer_id": "C00076",
+    "store_id": "S02",
+    "product_id": "P0041",
+    "quantity": "0",
+    "unit_price": "444.0",
+    "discount_pct": "10",
+    "order_amount": "0.0",
+    "payment_mode": "UPI",
+    "order_status": "DELIVERED",
+    "channel": "App",
+    "delivery_minutes": "18"
+  },
+  "etl_failure_reasons": [
+    "order_quantity"
+  ],
+  "elt_rule": "order_quantity",
+  "etl_fact_rows": 0,
+  "elt_revenue_rows": 0
+}
